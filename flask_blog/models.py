@@ -66,6 +66,8 @@ class Comment(db.Model):
 
     def __repr__(self) -> str:
         return f'comment-{self.id}'
+
+db.create_all()
     
 
 
