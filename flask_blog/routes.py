@@ -24,8 +24,8 @@ def home_page():
     date_format = "%Y-%d-%m %H:%M:%S.%f"
     return render_template('home.html', posts=posts, date_format=date_format, a=datetime)
 
-@app.route("")
-def about_pge():
+@app.route("/about")
+def about_page():
     return render_template('about.html')
 
 @app.route("/sign_up", methods=['GET', 'POST'])
