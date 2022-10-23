@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Flask Blog- Home Page{% endblock title %}
+{% block content %}
+    <h2 mb-3>Posts by {{ user.username }}({{posts.total}})</h2>
+    <hr>
+    {% for post in posts.items %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ url_for('static', filename='images/' + post.author.image_file) }}" alt="">    
+            <div class="media-body">
+              <div class="article-metadata">
+                <p class="mr-2" href="#" style="color: #C5A880; display: inline;">{{ post.author.username }}</p>
+                <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+              </div>
+              <p class="article-content"><a class="text-decoration-none" style="color: black;" href="{{ url_for('view_post', post_id=post.id) }}">{{ post.content }}</a></p>
+            </div>
+        </article>
+    {% endfor %}
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_num %}
+        {% if page_num == posts.page %}
+          <a class="btn btn-primary mb-4" href="{{url_for('user_posts', page=page_num, username=user.username)}}">{{ page_num }}</a>
+        {% else %}
+          <a class="btn btn-outline-primary mb-4" href="{{url_for('user_posts', page=page_num, username=user.username)}}">{{ page_num }}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+    {% endfor %}
+{% endblock content %}

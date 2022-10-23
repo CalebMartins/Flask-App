@@ -1,0 +1,48 @@
+CREATING A PACKAGE FOR A FLASK APLLICATION
+this is done basically to prevent the circular import error when the programmer wants to separate the database models form the main .py file.
+An __init__.py file has to be created in the package folder
+The pakage folder must contain all the neccessary files and folder for the application except the one file which only contians the lines of code to run the app.
+Any import apart from a file import made from the package folder without explitly stating the file to import from is made from the __init__.py file
+
+CREATING CUSTOM VALIDATORS IN FLASK WTF
+this is done using a method in the form class
+def valiadte_field(self, field):
+    if True:
+        raise ValidationError('Validation Message')
+
+
+pbkdf2:sha256:260000$4JoadCy0$8897dc0cb252afae4d492437ae791aa7e1dcf61cde94c8fb29125fcf71d183f6
+
+pbkdf2:sha256:260000$IzPQvMae$0a106253c2ac7a9b45aafc7edd977557d5be6cfb95b734ce1884bc5b7a7bb514
+
+pbkdf2:sha256:260000$w1DvtglW$f68aea1caf410eedd4242f564150fc413a408b92cab46db1be664effdd161548
+
+PAGINATION
+models = Model.query.paginate(page='', per_page='')
+models is a pagination object and unlike the .all() it is not iterable, it can only be made iterable by using the attribute .items.
+pagination is done to prevent loading of all the data on the data base onto a single page which could slow down the application...paginating the data base also makes handling data easy and helps to create a good looking website.
+
+frequently used(at least in my project) attributes in the pagination class(full list can be viwed using the dir() function)
+- iter_pages - returns a list off all page numbers in the database
+- page - returns the current page number
+- items - returns a list of all the database objects
+
+
+ALLOWING USERS CHANGE THEIR PASSWORDS BY USING A SECURE TIME SENSITIVE TOKEN USING THE itsdangerous MODULE.
+-procedure
+
+from itsdangerous import TimedJSONWebSIgnatureSerializer as TimedJSONWebSIgnatureSerializer
+
+# creating an instance of the TimedJSONWebSIgnatureSerializer class and passing in a secret key of 'secret' and an expiration time of 30sec as arguments.
+s = Serializer('secret', 30)
+
+# Creating token using the .dumps() method and pass in a pay load which should be a dictionary with the users id as it's key
+token = s.dumps({'user_id': 1}).decode('utf-8') # this token expires after 30 seconds
+
+# it's ideal to create functions for getting the user's unique token and verifying it in the user database class.
+
+# getting user_id out of the generated token
+user_id = s.loads(token)['user_id']
+
+
+

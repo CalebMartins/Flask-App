@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block title %}Make Post{% endblock title %}
+{% block content %}
+<form action="{{ url_for('make_post') }}" method="post">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Make Post</legend>
+        <div class="form-group">
+
+            {% if form.content.errors %}
+                {{ form.content(class="form-control is-invalid", id="groupTextarea") }}
+                <div class="invalid-feedback">
+                    {% for error in form.content.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.content(class="form-control", id="groupTextarea") }} 
+            {% endif%}
+  
+        </div>
+    </fieldset>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-outline-warning btn-lg mt-3") }}
+    </div>
+</form>
+{% endblock content %}
