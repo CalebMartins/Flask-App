@@ -7,10 +7,10 @@ import os
 app = Flask(__name__)
 
 # Flask WTF
-app.config['SECRET_KEY'] = '6607fd26d3df259abdbd181d3d3c90e9'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 # Connect To The DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 db = SQLAlchemy(app)
 
 # Connect to Login Manager
