@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '123'
 
 # Connect To The DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///site.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///site.db")
 db = SQLAlchemy(app)
 
 # Connect to Login Manager
@@ -23,8 +23,8 @@ login_manager.login_message_category = 'info' # changing category of error messa
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] =  os.environ.get('FLASK_MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] =  os.environ.get('FLASK_MAIL_PASSWORD')
+app.config['MAIL_USERNAME'] =  os.environ.get("FLASK_MAIL_USERNAME")
+app.config['MAIL_PASSWORD'] =  os.environ.get("FLASK_MAIL_PASSWORD")
 mail = Mail(app)
 
 from flask_blog import routes
