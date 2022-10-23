@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 # Flask WTF
-app.config['SECRET_KEY'] = os.environ.get('KEY')
+app.config['SECRET_KEY'] = '123'
 
 # Connect To The DB
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///site.db')
